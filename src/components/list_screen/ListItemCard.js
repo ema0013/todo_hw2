@@ -27,6 +27,15 @@ export class ListItemCard extends Component {
                     {this.props.listItem.due_date}
                 </div>
                 {this.getCompletedDiv()}
+                <div className='list_item_card_up'>
+
+                </div>
+                <div className='list_item_card_down'>
+                    
+                </div>
+                <div className='list_item_card_delete'>
+                    
+                </div>
             </div>
         )
     }
