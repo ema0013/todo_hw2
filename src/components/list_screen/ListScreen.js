@@ -30,14 +30,16 @@ export class ListScreen extends Component {
                         <input 
                             value={this.getListName()} 
                             type="text" 
-                            id="list_name_textfield" />
+                            id="list_name_textfield" 
+                            />
                     </div>
                     <div id="list_details_owner_container" className="text_toolbar">
                         <span id="list_owner_prompt">Owner:</span>
                         <input 
                             value={this.getListOwner()}
                             type="text" 
-                            id="list_owner_textfield" />
+                            id="list_owner_textfield" 
+                            onChange={this.changeName()}/>
                     </div>
                 </div>
                 <ListItemsTable todoList={this.props.todoList} />
