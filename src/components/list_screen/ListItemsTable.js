@@ -8,28 +8,26 @@ export class ListItemsTable extends Component {
 
     sortByTask = () =>{
         this.state.currentSortingCriteria === 'increasingTaskSort' ? 
-        this.setState({currentSortingCriteria: 'decreasingTaskSort'})
+        this.setState({currentSortingCriteria: 'decreasingTaskSort'},this.sortItems)
         :
-        this.setState({currentSortingCriteria: 'increasingTaskSort'});
-        this.sortItems();
+        this.setState({currentSortingCriteria: 'increasingTaskSort'},this.sortItems);
     }
     sortByDate = () =>{
         this.state.currentSortingCriteria === 'increasingDateSort' ? 
-        this.setState({currentSortingCriteria: 'decreasingDateSort'})
+        this.setState({currentSortingCriteria: 'decreasingDateSort'},this.sortItems)
         :
-        this.setState({currentSortingCriteria: 'increasingDateSort'});
-        this.sortItems();
+        this.setState({currentSortingCriteria: 'increasingDateSort'},this.sortItems);
     }
     sortByCompleted = () =>{
         this.state.currentSortingCriteria === 'increasingCompleteSort' ? 
-        this.setState({currentSortingCriteria: 'decreasingCompleteSort'})
+        this.setState({currentSortingCriteria: 'decreasingCompleteSort'},this.sortItems)
         :
-        this.setState({currentSortingCriteria: 'increasingCompleteSort'});
-        this.sortItems();
+        this.setState({currentSortingCriteria: 'increasingCompleteSort'},this.sortItems);
     }
 
     sortItems = () =>{
         this.props.todoList.items.sort(this.compare);
+        this.setState({currentSortingCriteria:this.state.currentSortingCriteria});
     }
 
     compare = (item1, item2) =>{
