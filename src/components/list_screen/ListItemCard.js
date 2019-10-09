@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 
 export class ListItemCard extends Component {
-    getCompletedDiv =() =>{
+    getCompletedDiv = () =>{
         return(
         this.props.listItem.completed ?
         <div className='list_item_card_completed'>
@@ -11,6 +11,32 @@ export class ListItemCard extends Component {
         <div className='list_item_card_not_completed'>
             Pending
         </div>
+        )
+    }
+
+    createUpDiv = () =>{
+        return(
+            this.props.listItem.key === 0 ?
+            <div className='disabled list_item_card_up'>
+                &#x2191;
+            </div>  
+            :
+            <div className='list_item_card_up'>
+                &#x2191;
+            </div>  
+        )
+    }
+
+    createDownDiv = () =>{
+        return(
+            this.props.listItem.key >= this.props.listLength - 1 ?
+            <div className='disabled list_item_card_down'>
+                &#x2193;
+            </div>  
+            :
+            <div className='list_item_card_down'>
+                &#x2193;
+            </div>  
         )
     }
 
@@ -27,14 +53,10 @@ export class ListItemCard extends Component {
                     {this.props.listItem.due_date}
                 </div>
                 {this.getCompletedDiv()}
-                <div className='list_item_card_up'>
-
-                </div>
-                <div className='list_item_card_down'>
-                    
-                </div>
+                {this.createUpDiv()}
+                {this.createDownDiv()}
                 <div className='list_item_card_delete'>
-                    
+                    &#xd7;
                 </div>
             </div>
         )

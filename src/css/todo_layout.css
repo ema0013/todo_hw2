@@ -118,34 +118,21 @@ body {
   text-align: center;
   vertical-align: center;
 }
-.item_card_up, .item_card_down, .item_card_delete {
+.list_item_card_up, .list_item_card_down, .list_item_card_delete {
   position:absolute;
   width:48px;
   height:100%;
   display:block;
-  margin-left:auto;
-  margin-right:auto;
+  text-align:center;
 }
 .list_item_card_up{
   left:88%;
-  background-image:url("../images/icons/MoveUp.png");
-  background-position:center;
-  background-repeat: no-repeat;
-  background-size:cover;
 }
 .list_item_card_down{
   left:92%;
-  background-image:url("../images/icons/MoveDown.png");
-  background-position:center;
-  background-repeat: no-repeat;
-  background-size:cover;
 }
 .list_item_card_delete{
   left:96.05%;
-  background-image:url("../images/icons/Close.png");
-  background-position:center;
-  background-repeat: no-repeat;
-  background-size:cover;
 }
 
 

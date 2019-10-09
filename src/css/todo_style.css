@@ -146,16 +146,19 @@ body {
   color: var(--swatch-complement);
   cursor: default;
 }
-.disabled {
-  background-color: lightgray;
-}
-.disabled:hover {
-  color: var(--swatch-neutral);
-}
 
 .list_item_card_up,.list_item_card_down,.list_item_card_delete{
   border-radius:5px;
   background-color:var(--swatch-accent);
+  font-size: 36px;
+}
+
+.disabled {
+  background-color: lightgray;
+}
+.disabled:hover {
+  cursor:not-allowed;
+  color: var(--swatch-neutral);
 }
 
 /* ITEM SCREEN CONTROLS */
