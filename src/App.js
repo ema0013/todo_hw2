@@ -14,7 +14,19 @@ class App extends Component {
   state = {
     currentScreen: AppScreen.HOME_SCREEN,
     todoLists: testTodoListData.todoLists,
-    currentList: null
+    currentList: null,
+    dialogVisible:false
+  }
+
+  showDialog = () =>{
+    let dialog = document.getElementById("modal_yes_no_dialog");
+    dialog.classList.add("is_visible");
+    this.setState({dialogVisible:true});
+  }
+  hideDialog = () =>{
+    let dialog = document.getElementById("modal_yes_no_dialog");
+    dialog.classList.remove("is_visible");
+    this.setState({dialogVisible:false});
   }
 
   goHome = () => {
@@ -27,6 +39,13 @@ class App extends Component {
     this.setState({currentList: todoListToLoad}, () => {console.log(this.state.currentList)});
   }
 
+  deleteCurrentList = () =>{
+    let indexOfListToRemove = this.state.todoLists.indexOf(this.state.currentList);
+    if(indexOfListToRemove >= 0)
+      this.state.todoLists.splice(indexOfListToRemove,1);
+    this.setState({todoLists:this.state.todoLists},this.goHome);
+  }
+
   render() {
     switch(this.state.currentScreen) {
       case AppScreen.HOME_SCREEN:
@@ -36,7 +55,10 @@ class App extends Component {
       case AppScreen.LIST_SCREEN:            
         return <ListScreen
           goHome={this.goHome.bind(this)}
-          todoList={this.state.currentList} />;
+          todoList={this.state.currentList} 
+          deleteCurrentList={this.deleteCurrentList}
+          showDialog={this.showDialog}
+          hideDialog={this.hideDialog}/>;
       case AppScreen.ITEM_SCREEN:
         return <ItemScreen />;
       default:

@@ -27,7 +27,11 @@ export class ListItemsTable extends Component {
 
     sortItems = () =>{
         this.props.todoList.items.sort(this.compare);
+        this.props.todoList.items.map(this.toggleButtons);
         this.setState({currentSortingCriteria:this.state.currentSortingCriteria});
+    }
+
+    toggleButtons = (item) =>{
     }
 
     compare = (item1, item2) =>{
