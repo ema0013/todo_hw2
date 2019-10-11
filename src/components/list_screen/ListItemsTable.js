@@ -27,11 +27,10 @@ export class ListItemsTable extends Component {
 
     sortItems = () =>{
         this.props.todoList.items.sort(this.compare);
-        this.props.todoList.items.map(this.toggleButtons);
-        this.setState({currentSortingCriteria:this.state.currentSortingCriteria});
-    }
+        this.props.todoList.items.map((todoItem) =>{
 
-    toggleButtons = (item) =>{
+        });
+        this.setState({currentSortingCriteria:this.state.currentSortingCriteria});
     }
 
     compare = (item1, item2) =>{
@@ -80,6 +79,25 @@ export class ListItemsTable extends Component {
         }
     }
 
+    deleteCurrentItem = (currentIndex) =>{
+        this.props.todoList.items.splice(currentIndex,1);
+        this.setState({currentSortingCriteria:this.state.currentSortingCriteria});
+    }
+
+    moveItemUp = (currentIndex) =>{
+        var a = this.props.todoList.items[currentIndex];
+        this.props.todoList.items[currentIndex] = this.props.todoList.items[currentIndex - 1];
+        this.props.todoList.items[currentIndex - 1] = a;
+        this.setState({currentSortingCriteria:this.state.currentSortingCriteria});
+    }
+
+    moveItemDown = (currentIndex) =>{
+        var a = this.props.todoList.items[currentIndex];
+        this.props.todoList.items[currentIndex] = this.props.todoList.items[currentIndex + 1];
+        this.props.todoList.items[currentIndex + 1] = a;
+        this.setState({currentSortingCriteria:this.state.currentSortingCriteria});
+    }
+
     render() {
         return (
             <div id="list_items_container" className = "list_item_header_card">
@@ -97,8 +115,12 @@ export class ListItemsTable extends Component {
                     this.props.todoList.items.map((todoItem)=>(
                         <ListItemCard 
                             key={todoItem.key}
+                            itemIndex={this.props.todoList.items.indexOf(todoItem)}
                             listItem={todoItem}
-                            listLength={this.props.todoList.items.length} />
+                            listLength={this.props.todoList.items.length}
+                            deleteCurrentItem={this.deleteCurrentItem} 
+                            moveItemUp={this.moveItemUp}
+                            moveItemDown={this.moveItemDown}/>
                     ))
                 }
             </div>

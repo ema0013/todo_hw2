@@ -16,12 +16,14 @@ export class ListItemCard extends Component {
 
     createUpDiv = () =>{
         return(
-            this.props.listItem.key === 0 ?
-            <div className='disabled list_item_card_up'>
+            this.props.itemIndex === 0 ?
+            <div className='disabled list_item_card_up' 
+            onClick={this.props.moveItemUp.bind(this,this.props.itemIndex)}>
                 &#x2191;
             </div>  
             :
-            <div className='list_item_card_up'>
+            <div className='list_item_card_up' 
+            onClick={this.props.moveItemUp.bind(this,this.props.itemIndex)}>
                 &#x2191;
             </div>  
         )
@@ -29,12 +31,14 @@ export class ListItemCard extends Component {
 
     createDownDiv = () =>{
         return(
-            this.props.listItem.key >= this.props.listLength - 1 ?
-            <div className='disabled list_item_card_down'>
+            this.props.itemIndex >= this.props.listLength - 1 ?
+            <div className='disabled list_item_card_down' 
+            onClick={this.props.moveItemDown.bind(this,this.props.itemIndex)}>
                 &#x2193;
             </div>  
             :
-            <div className='list_item_card_down'>
+            <div className='list_item_card_down'
+            onClick={this.props.moveItemDown.bind(this,this.props.itemIndex)} >
                 &#x2193;
             </div>  
         )
@@ -55,7 +59,8 @@ export class ListItemCard extends Component {
                 {this.getCompletedDiv()}
                 {this.createUpDiv()}
                 {this.createDownDiv()}
-                <div className='list_item_card_delete'>
+                <div className='list_item_card_delete' 
+                onClick={this.props.deleteCurrentItem.bind(this,this.props.itemIndex)}>
                     &#xd7;
                 </div>
             </div>
