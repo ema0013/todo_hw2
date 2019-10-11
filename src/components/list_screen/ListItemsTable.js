@@ -27,9 +27,6 @@ export class ListItemsTable extends Component {
 
     sortItems = () =>{
         this.props.todoList.items.sort(this.compare);
-        this.props.todoList.items.map((todoItem) =>{
-
-        });
         this.setState({currentSortingCriteria:this.state.currentSortingCriteria});
     }
 
