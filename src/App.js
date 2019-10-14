@@ -15,7 +15,8 @@ class App extends Component {
     currentScreen: AppScreen.HOME_SCREEN,
     todoLists: testTodoListData.todoLists,
     currentList: null,
-    dialogVisible:false
+    dialogVisible:false,
+    todoItem:null
   }
 
   showDialog = () =>{
@@ -46,6 +47,19 @@ class App extends Component {
     this.setState({todoLists:this.state.todoLists},this.goHome);
   }
 
+  goItemScreen = () => {
+    // this one is called for a new item
+    this.setState({todoItem:null});
+    this.setState({currentScreen:AppScreen.ITEM_SCREEN});
+    
+  }
+
+  editItem = (itemtoEdit) =>{
+    // this one is called for editing items
+    this.setState({currentScreen:AppScreen.ITEM_SCREEN});
+    this.setState({todoItem:itemtoEdit});
+  }
+
   render() {
     switch(this.state.currentScreen) {
       case AppScreen.HOME_SCREEN:
@@ -58,9 +72,14 @@ class App extends Component {
           todoList={this.state.currentList} 
           deleteCurrentList={this.deleteCurrentList}
           showDialog={this.showDialog}
-          hideDialog={this.hideDialog}/>;
+          hideDialog={this.hideDialog}
+          goItemScreen={this.goItemScreen}
+          editItem={this.editItem.bind(this)}/>;
       case AppScreen.ITEM_SCREEN:
-        return <ItemScreen />;
+        return <ItemScreen 
+          loadList={this.loadList.bind(this)}
+          todoItem={this.state.todoItem}
+          currentList={this.state.currentList}/>;
       default:
         return <div>ERROR</div>;
     }

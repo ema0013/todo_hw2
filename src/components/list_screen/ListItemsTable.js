@@ -117,9 +117,14 @@ export class ListItemsTable extends Component {
                             listLength={this.props.todoList.items.length}
                             deleteCurrentItem={this.deleteCurrentItem} 
                             moveItemUp={this.moveItemUp}
-                            moveItemDown={this.moveItemDown}/>
+                            moveItemDown={this.moveItemDown}
+                            editItem={this.props.editItem}/>
                     ))
                 }
+                <div id="list_item_add" className="list_item_add_card"
+                    onClick={this.props.goItemScreen}>
+                    +
+                </div>
             </div>
         )
     }

@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import ListHeading from './ListHeading'
 import ListItemsTable from './ListItemsTable'
 import ListTrash from './ListTrash'
+import { tsImportEqualsDeclaration } from '@babel/types';
 
 export class ListScreen extends Component {
     getListName() {
@@ -41,7 +42,9 @@ export class ListScreen extends Component {
                             />
                     </div>
                 </div>
-                <ListItemsTable todoList={this.props.todoList} />
+                <ListItemsTable todoList={this.props.todoList} 
+                    goItemScreen={this.props.goItemScreen}
+                    editItem={this.props.editItem}/>
                 <div className="modal" id="modal_yes_no_dialog" data-animation="slideInOutLeft">
                     <div className="modal_dialog">
                         <header className="dialog_header">
