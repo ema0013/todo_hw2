@@ -76,19 +76,22 @@ export class ListItemsTable extends Component {
         }
     }
 
-    deleteCurrentItem = (currentIndex) =>{
+    deleteCurrentItem = (event,currentIndex) =>{
+        event.stopPropagation();
         this.props.todoList.items.splice(currentIndex,1);
         this.setState({currentSortingCriteria:this.state.currentSortingCriteria});
     }
 
-    moveItemUp = (currentIndex) =>{
+    moveItemUp = (event,currentIndex) =>{
+        event.stopPropagation();
         var a = this.props.todoList.items[currentIndex];
         this.props.todoList.items[currentIndex] = this.props.todoList.items[currentIndex - 1];
         this.props.todoList.items[currentIndex - 1] = a;
         this.setState({currentSortingCriteria:this.state.currentSortingCriteria});
     }
 
-    moveItemDown = (currentIndex) =>{
+    moveItemDown = (event,currentIndex) =>{
+        event.stopPropagation();
         var a = this.props.todoList.items[currentIndex];
         this.props.todoList.items[currentIndex] = this.props.todoList.items[currentIndex + 1];
         this.props.todoList.items[currentIndex + 1] = a;
@@ -115,9 +118,9 @@ export class ListItemsTable extends Component {
                             itemIndex={this.props.todoList.items.indexOf(todoItem)}
                             listItem={todoItem}
                             listLength={this.props.todoList.items.length}
-                            deleteCurrentItem={this.deleteCurrentItem} 
-                            moveItemUp={this.moveItemUp}
-                            moveItemDown={this.moveItemDown}
+                            deleteCurrentItem={this.deleteCurrentItem.bind(this)} 
+                            moveItemUp={this.moveItemUp.bind(this)}
+                            moveItemDown={this.moveItemDown.bind(this)}
                             editItem={this.props.editItem}/>
                     ))
                 }
