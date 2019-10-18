@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types';
+import editItem_Transaction from '../../jsTPS/transactions/editItem_Transaction';
 
 export class ItemScreen extends Component {
 
@@ -34,8 +35,7 @@ export class ItemScreen extends Component {
         }
         else{
             newItem.key = this.props.todoItem.key;
-            let index = this.props.currentList.items.indexOf(this.props.todoItem);
-            this.props.currentList.items[index] = newItem;
+            this.props.tps.addTransaction( new editItem_Transaction(this.props.currentList,newItem,this.props.todoItem));
         }
         this.props.loadList(this.props.currentList);
     }

@@ -1,5 +1,8 @@
 import React, { Component } from 'react'
 import ListItemCard from './ListItemCard'
+import ItemDown_Transaction from '../../jsTPS/transactions/ItemDown_Transaction'
+import ItemUp_Transaction from '../../jsTPS/transactions/ItemUp_Transaction'
+import ItemDelete_Transaction from '../../jsTPS/transactions/ItemDelete_Transaction'
 
 export class ListItemsTable extends Component {
     state = {
@@ -78,23 +81,19 @@ export class ListItemsTable extends Component {
 
     deleteCurrentItem = (event,currentIndex) =>{
         event.stopPropagation();
-        this.props.todoList.items.splice(currentIndex,1);
+        this.props.tps.addTransaction(new ItemDelete_Transaction(this.props.todoList, currentIndex));
         this.setState({currentSortingCriteria:this.state.currentSortingCriteria});
     }
 
     moveItemUp = (event,currentIndex) =>{
         event.stopPropagation();
-        var a = this.props.todoList.items[currentIndex];
-        this.props.todoList.items[currentIndex] = this.props.todoList.items[currentIndex - 1];
-        this.props.todoList.items[currentIndex - 1] = a;
+        this.props.tps.addTransaction(new ItemUp_Transaction(this.props.todoList, currentIndex));
         this.setState({currentSortingCriteria:this.state.currentSortingCriteria});
     }
 
     moveItemDown = (event,currentIndex) =>{
         event.stopPropagation();
-        var a = this.props.todoList.items[currentIndex];
-        this.props.todoList.items[currentIndex] = this.props.todoList.items[currentIndex + 1];
-        this.props.todoList.items[currentIndex + 1] = a;
+        this.props.tps.addTransaction(new ItemDown_Transaction(this.props.todoList,currentIndex));
         this.setState({currentSortingCriteria:this.state.currentSortingCriteria});
     }
 
@@ -121,7 +120,8 @@ export class ListItemsTable extends Component {
                             deleteCurrentItem={this.deleteCurrentItem.bind(this)} 
                             moveItemUp={this.moveItemUp.bind(this)}
                             moveItemDown={this.moveItemDown.bind(this)}
-                            editItem={this.props.editItem}/>
+                            editItem={this.props.editItem}
+                            tps={this.props.tps}/>
                     ))
                 }
                 <div id="list_item_add" className="list_item_add_card"
